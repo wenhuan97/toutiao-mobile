@@ -77,7 +77,7 @@ export default {
       isShowCode: false,
       loading: false,
       user: {
-        mobile: '18661561687',
+        mobile: '17090086870',
         code: '246810'
       },
       formRules: {
@@ -120,6 +120,7 @@ export default {
         this.$toast.success('登录成功~')
         // 登录成功 后 把token信息存储到 vuex中
         this.$store.commit('setState', data.data)
+        this.$router.back()
       } catch (error) {
         this.$toast.fail('登录失败,手机号或者验证码错误')
       }

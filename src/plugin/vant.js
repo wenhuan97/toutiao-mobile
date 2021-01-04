@@ -8,7 +8,11 @@ import {
   Field,
   CellGroup,
   Toast,
-  CountDown
+  CountDown,
+  Grid,
+  GridItem,
+  Cell,
+  Dialog
 } from 'vant'
 
 Vue.use(Button)
@@ -20,3 +24,7 @@ Vue.use(Field)
 Vue.use(CellGroup)
 Vue.use(Toast)
 Vue.use(CountDown)
+Vue.use(Grid)
+Vue.use(GridItem)
+Vue.use(Cell)
+Vue.use(Dialog)
