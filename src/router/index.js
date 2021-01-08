@@ -36,6 +36,17 @@ const routes = [
         component: () => import('@/views/my/')
       }
     ]
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/search/')
+  },
+  {
+    path: '/article/:articleId', // 动态路由传参 每一个文章详情 都有id
+    name: 'article',
+    component: () => import('@/views/article'),
+    props: true // 映射到 组件中的props 中
   }
 ]
 

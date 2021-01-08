@@ -6,7 +6,7 @@
         <div class="avatar">
           <img :src="users.photo" alt="" />
           <div class="name">
-            <span>{{users.name}}</span>
+            <span>{{ users.name }}</span>
           </div>
         </div>
         <van-button round class="update-btn" type="default"
@@ -15,19 +15,19 @@
       </div>
       <div class="data-info">
         <div class="headline msg">
-          <span>{{users.art_count}}</span>
+          <span>{{ users.art_count }}</span>
           <span>头条</span>
         </div>
         <div class="guanzhu msg">
-          <span>{{users.follow_count}}</span>
+          <span>{{ users.follow_count }}</span>
           <span>关注</span>
         </div>
         <div class="fans msg">
-          <span>{{users.fans_count}}</span>
+          <span>{{ users.fans_count }}</span>
           <span>粉丝</span>
         </div>
         <div class="likes msg">
-          <span>{{users.like_count}}</span>
+          <span>{{ users.like_count }}</span>
           <span>获赞</span>
         </div>
       </div>
