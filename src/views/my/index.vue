@@ -9,7 +9,7 @@
             <span>{{ users.name }}</span>
           </div>
         </div>
-        <van-button round class="update-btn" type="default"
+        <van-button to="/user/profile" round class="update-btn" type="default"
           >编辑资料</van-button
         >
       </div>
@@ -18,11 +18,11 @@
           <span>{{ users.art_count }}</span>
           <span>头条</span>
         </div>
-        <div class="guanzhu msg">
+        <div class="guanzhu msg" @click="goFollow">
           <span>{{ users.follow_count }}</span>
           <span>关注</span>
         </div>
-        <div class="fans msg">
+        <div class="fans msg" @click="goFans">
           <span>{{ users.fans_count }}</span>
           <span>粉丝</span>
         </div>
@@ -34,7 +34,17 @@
     </div>
     <!-- 未登录 -->
     <div class="no-login" v-else>
-      <div class="logo" @click="$router.push('/login')">
+      <div
+        class="logo"
+        @click="
+          $router.push({
+            name: 'login',
+            query: {
+              redirect: '/my'
+            }
+          })
+        "
+      >
         <img src="./avatar.png" alt="" />
         <span>登录/注册</span>
       </div>
@@ -46,16 +56,29 @@
         icon-prefix="icon"
         icon="shoucang"
         text="收藏"
+        :to="{
+          name: 'collectHistory',
+          query: {
+            active: 0
+          }
+        }"
       />
       <van-grid-item
         class="nav-grid-item"
         icon-prefix="icon"
         icon="lishi"
         text="历史"
+        :to="{
+          name: 'collectHistory',
+          query: {
+            active: 1
+          }
+        }"
       />
     </van-grid>
-    <van-cell title="消息通知" is-link to="index" />
-    <van-cell class="mb-4" title="布里茨同学" is-link to="index" />
+    <van-cell title="消息通知" is-link to="/feedback" />
+    <van-cell title="布里茨同学" is-link to="/user/chat" />
+    <van-cell class="mb-4" title="系统设置" is-link to="/settingPage" />
     <van-cell
       @click="loginOut"
       v-if="user"
@@ -105,6 +128,24 @@ export default {
         .catch(() => {
           // on cancel
         })
+    },
+    // 去关注粉丝页面
+    goFollow() {
+      this.$router.push({
+        name: 'follow',
+        query: {
+          active: 0
+        }
+      })
+    },
+    // 去粉丝页面
+    goFans() {
+      this.$router.push({
+        name: 'follow',
+        query: {
+          active: 1
+        }
+      })
     }
   }
 }

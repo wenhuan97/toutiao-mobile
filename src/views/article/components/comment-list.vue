@@ -34,6 +34,10 @@ export default {
       type: [String, Object, Number],
       required: true
     },
+    type: {
+      type: String,
+      default: 'a'
+    },
     list: {
       type: Array,
       default: () => []
@@ -56,8 +60,8 @@ export default {
     // 请求数据
     async onLoad() {
       const { data } = await getComments({
-        type: 'a',
-        source: this.source,
+        type: this.type,
+        source: this.source.toString(),
         offset: this.offset,
         limit: this.limit
       })
