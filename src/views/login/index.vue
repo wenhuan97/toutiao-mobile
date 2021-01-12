@@ -120,7 +120,10 @@ export default {
         this.$toast.success('登录成功~')
         // 登录成功 后 把token信息存储到 vuex中
         this.$store.commit('setState', data.data)
-        this.$router.back()
+        // 跳转前 清除 layout组件缓存
+        this.$store.commit('removeCachePages', 'LayouIndex')
+        // this.$router.back()
+        this.$router.push(this.$route.query.redirect || '/')
       } catch (error) {
         this.$toast.fail('登录失败,手机号或者验证码错误')
       }

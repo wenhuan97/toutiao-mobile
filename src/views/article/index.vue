@@ -83,8 +83,12 @@
       <post-comment @post-success="onPostSuccess" :target="articleId" />
     </van-popup>
     <!-- 回复评论弹出层 -->
-    <van-popup v-model="replyShow" position="bottom">
-      <comment-reply />
+    <van-popup v-if="replyShow" v-model="replyShow" position="bottom">
+      <comment-reply
+        :articleId="articleId"
+        @close="replyShow = false"
+        :comment="replyComment"
+      />
     </van-popup>
   </div>
 </template>
@@ -120,7 +124,8 @@ export default {
       show: false,
       replyShow: false,
       commentList: [], // 评论的列表
-      commentTotal: 0
+      commentTotal: 0,
+      replyComment: {} // 点击当前评论 的评论对象
     }
   },
   computed: {},
@@ -163,7 +168,7 @@ export default {
     },
     // 关注/取消关注
     async addFollowed() {
-      this.loading = true
+      this.isFollowedLoading = true
       if (this.article.is_followed) {
         //   如果已关注 取消关注 反之
         await noFollowings(this.article.aut_id)
@@ -171,7 +176,7 @@ export default {
         await followings(this.article.aut_id)
       }
       this.article.is_followed = !this.article.is_followed
-      this.loading = false
+      this.isFollowedLoading = false
     },
     // 收藏/取消收藏
     async onCollected() {
@@ -224,8 +229,8 @@ export default {
     },
     // 展示评论
     onReplyClick(comment) {
-      console.log(comment)
       this.replyShow = true
+      this.replyComment = comment
     }
   }
 }

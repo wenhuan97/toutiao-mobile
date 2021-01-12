@@ -25,7 +25,10 @@ export default {
   computed: {},
   watch: {},
   created() {},
-  mounted() {},
+  mounted() {
+    // 组件渲染再添加 缓存
+    this.$store.commit('addCachePages', 'LayouIndex')
+  },
   methods: {}
 }
 </script>

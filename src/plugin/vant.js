@@ -20,7 +20,10 @@ import {
   Image,
   Popup,
   Icon,
-  Search
+  Search,
+  Picker,
+  DatetimePicker,
+  Switch
 } from 'vant'
 
 Vue.use(Button)
@@ -45,3 +48,6 @@ Vue.use(Popup)
 Vue.use(Icon)
 Vue.use(Search)
 Vue.use(Field)
+Vue.use(Picker)
+Vue.use(DatetimePicker)
+Vue.use(Switch)

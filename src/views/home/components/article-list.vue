@@ -1,11 +1,6 @@
 <template>
-  <van-pull-refresh
-    v-model="isRefreshLoading"
-    @refresh="onRefresh"
-    :success-text="succesText"
-  >
+  <div class="article-list" ref="article-list">
     <van-list
-      class="article-list"
       v-model="loading"
       :finished="finished"
       finished-text="没有更多了"
@@ -17,12 +12,13 @@
         :article="item"
       />
     </van-list>
-  </van-pull-refresh>
+  </div>
 </template>
 
 <script>
 import { getArticles } from '@/api/article'
 import ArticleItem from '@/components/article-item'
+import { debounce } from 'lodash'
 
 export default {
   props: {
@@ -39,14 +35,28 @@ export default {
       loading: false,
       finished: false,
       timestamp: null,
-      isRefreshLoading: false,
-      succesText: ''
+      scrollTopRet: 0
     }
   },
   computed: {},
   watch: {},
   created() {},
-  mounted() {},
+  mounted() {
+    const articleList = this.$refs['article-list']
+
+    // 防抖
+    articleList.onscroll = debounce(() => {
+      console.log(1)
+      this.scrollTopRet = articleList.scrollTop
+    }, 60)
+  },
+  activated() {
+    // 组件从缓存中被激活
+    this.$refs['article-list'].scrollTop = this.scrollTopRet
+  },
+  deactivated() {
+    // 组件被缓存
+  },
   methods: {
     async onLoad() {
       // 异步更新数据
@@ -87,14 +97,12 @@ export default {
 </script>
 
 <style scoped lang="less">
-
-  .article-list {
-    position: fixed;
-    top: 90px;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    overflow-y: auto;
-  }
-
+.article-list {
+  position: fixed;
+  top: 90px;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  overflow-y: scroll;
+}
 </style>
