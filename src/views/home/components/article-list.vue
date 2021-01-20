@@ -46,7 +46,6 @@ export default {
 
     // 防抖
     articleList.onscroll = debounce(() => {
-      console.log(1)
       this.scrollTopRet = articleList.scrollTop
     }, 60)
   },

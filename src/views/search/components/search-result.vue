@@ -7,6 +7,7 @@
       @load="onLoad"
     >
       <van-cell
+        @click="goArticle(item.art_id)"
         v-for="(item, index) in list"
         :key="index"
         :title="item.title"
@@ -33,7 +34,8 @@ export default {
       loading: false,
       finished: false,
       page: 1, // 页码
-      perPage: 10 // 每页的数据条数
+      perPage: 10, // 每页的数据条数
+      articleId: 0
     }
   },
   computed: {},
@@ -55,6 +57,7 @@ export default {
         per_page: this.perPage,
         q: this.value
       })
+      console.log(data)
       const { results } = data.data
       this.list.push(...results)
       this.loading = false
@@ -63,6 +66,10 @@ export default {
       } else {
         this.finished = true
       }
+    },
+    goArticle(articleId) {
+      //   跳转至 文章详情页面
+      this.$router.push(`/article/${articleId}`)
     }
   }
 }

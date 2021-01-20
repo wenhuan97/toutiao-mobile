@@ -60,6 +60,7 @@ export default {
   mounted() {},
   methods: {
     onSearch(value) {
+      console.log(1)
       this.value = value
 
       //   触发搜索之后 追加至 历史记录数组顶部
